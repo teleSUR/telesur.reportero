@@ -8,9 +8,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import login
 from plone.app.testing import logout
 
-from Products.CMFCore.exceptions import AccessControl_Unauthorized
-from Products.CMFCore.WorkflowCore import WorkflowException
-
 from telesur.reportero.testing import INTEGRATION_TESTING
 
 
@@ -57,18 +54,20 @@ class WorkflowTest(unittest.TestCase):
     def test_anonymous_can_add_reports(self):
 
         logout()
-        self.folder.invokeFactory('telesur.reportero.anonreport', 'test-anon-report')
+        self.folder.invokeFactory('telesur.reportero.anonreport',
+                                  'test-anon-report')
         self.assertTrue('test-anon-report' in self.folder)
 
     def test_question_not_visible_by_anonymous_if_it_is_not_published(self):
         checkPermission = self.checkPermission
         logout()
-        self.folder.invokeFactory('telesur.reportero.anonreport', 'test-anon-report')
+        self.folder.invokeFactory('telesur.reportero.anonreport',
+                                  'test-anon-report')
         self.assertTrue('test-anon-report' in self.folder)
 
         report = self.folder['test-anon-report']
 
-        # Esto es correcto, podemos agregar como anonimo, pero no podemos verlo.
+        # Esto es correcto, podemos agregar como anonimo, pero no podemos verlo
         self.assertNotEqual(checkPermission('View', report), 1)
 
         self._loginAsManager()

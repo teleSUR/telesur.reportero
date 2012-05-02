@@ -9,10 +9,12 @@ from Products.CMFCore.utils import getToolByName
 
 from zope.security import checkPermission
 
+
 class IIReport(form.Schema):
     """
     A section that contains reports
     """
+
 
 class View(dexterity.DisplayForm):
     grok.context(IIReport)
@@ -23,7 +25,8 @@ class View(dexterity.DisplayForm):
         return pt(self)
 
     def can_add_reports(self):
-        return checkPermission('telesur.reportero.anonreportAddable', self.context)
+        return checkPermission('telesur.reportero.anonreportAddable',
+                               self.context)
 
     def can_edit(self):
         return checkPermission('cmf.ModifyPortalContent', self.context)
@@ -32,9 +35,9 @@ class View(dexterity.DisplayForm):
         pc = getToolByName(self.context, 'portal_catalog')
 
         ct = "telesur.reportero.anonreport"
-        path='/'.join(self.context.getPhysicalPath())
-        sort_on='Date'
-        sort_order='reverse'
+        path = '/'.join(self.context.getPhysicalPath())
+        sort_on = 'Date'
+        sort_order = 'reverse'
 
         results = pc.unrestrictedSearchResults(portal_type=ct,
                                                review_state=state,

@@ -42,5 +42,6 @@ class IntegrationTest(unittest.TestCase):
         new_object = createObject(factory)
         self.assertTrue(IIReport.providedBy(new_object))
 
+
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
