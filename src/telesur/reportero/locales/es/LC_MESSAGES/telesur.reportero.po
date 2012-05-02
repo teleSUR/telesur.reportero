@@ -1,0 +1,68 @@
+# Franco Pellegrini, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2012-05-02 03:36+0000\n"
+"PO-Revision-Date: 2012-05-02 00:39-0300\n"
+"Last-Translator: Franco Pellegrini\n"
+"Language-Team: Spanish <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: es\n"
+"Language-Name: Español\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: telesur.reportero\n"
+"Language: es\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:51
+msgid "Add new report"
+msgstr "Agregar un reporte nuevo"
+
+#: telesur/reportero/content/anonreport.py:41
+msgid "Date"
+msgstr "Fecha"
+
+#: telesur/reportero/content/anonreport.py:51
+msgid "Edited File"
+msgstr "Archivo Editado"
+
+#: telesur/reportero/content/anonreport.py:34
+msgid "File"
+msgstr "Archivo"
+
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:42
+msgid "Not published reports:"
+msgstr "Reportes no publicados:"
+
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:31
+msgid "Reports:"
+msgstr "Reportes:"
+
+#: telesur/reportero/content/anonreport.py:28
+msgid "Status"
+msgstr "Estado"
+
+#. Default: "Enter here the date in which this photo or video was taken."
+#: telesur/reportero/content/anonreport.py:42
+msgid "help_date"
+msgstr "Ingrese aquí la fecha en la que fue tomado este video o foto."
+
+#. Default: "You can load here a modified version of the original file."
+#: telesur/reportero/content/anonreport.py:52
+msgid "help_edited_file"
+msgstr "Puede cargar aquí una versión modificada del archivo original."
+
+#. Default: "Load here your image or video file."
+#: telesur/reportero/content/anonreport.py:35
+msgid "help_original_file"
+msgstr "Cargue aquí su archivo de imagen o video."
+
+#. Default: "Select status."
+#: telesur/reportero/content/anonreport.py:29
+msgid "help_status"
+msgstr "Seleccione el estado."
+
+

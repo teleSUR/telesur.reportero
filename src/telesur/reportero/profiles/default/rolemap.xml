@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<rolemap>
+
+  <permissions>
+
+    <permission name="telesur.reportero: Can add an Anonymous Report" acquire="True">
+      <role name="Anonymous"/>
+    </permission>
+
+  </permissions>
+</rolemap>

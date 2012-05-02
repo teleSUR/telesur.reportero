@@ -1,0 +1,162 @@
+Functional test:
+
+    >>> import os
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> request = layer['request']
+
+    >>> from DateTime import DateTime as now
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> portalURL = portal.absolute_url()
+
+    >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+Vamos al home y agregamos una seccion "I report", para poder agregar reportes
+
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink('I report section').click()
+    >>> browser.getControl('Title').value = 'Soy reportero'
+    >>> browser.getControl('Save').click()
+    >>> section_url = portalURL + '/soy-reportero'
+    >>> browser.getLink('Publish').click()
+
+Ahora salimos, y agregamos 6 reportes, como anónimo. La idea es que cada
+reporte se encuentre en un estado de workflow distinto, para probar lo que
+se ve, y lo permitido acceder por los permisos
+
+    >>> browser.open(portalURL + '/logout')
+    >>> browser.open(section_url)
+    >>> "Anonymous report" in browser.contents
+    True
+
+
+    >>> titles = ['Reporte privado', 'Reporte revisado', 'Reporte rechazado',
+    ...       'Reporte editado', 'Reporte organizado', 'Reporte publicado']
+
+    >>> for title in titles:
+    ...     photo = open(os.path.join(os.path.dirname(__file__), 'photo.jpg'))
+    ...     browser.getLink('Add new report').click()
+    ...     browser.getControl('Title').value = title
+    ...     browser.getControl(name="form.widgets.original_file").value = photo
+    ...     browser.getControl(name="form.widgets.date-day").value = "1"
+    ...     browser.getControl(name="form.widgets.date-month").value = ['1']
+    ...     browser.getControl(name="form.widgets.date-year").value = "2012"
+    ...     browser.getControl("Save").click()
+    ...     photo.close()
+
+
+En este momento, como anonimos, no deberíamos estar viendo ninguna de las
+preguntas, ya que se encuentran privadas
+
+    >>> 'Reporte privado' in browser.contents
+    False
+    >>> 'Reporte revisado' in browser.contents
+    False
+    >>> 'Reporte rechazado' in browser.contents
+    False
+    >>> 'Reporte editado' in browser.contents
+    False
+    >>> 'Reporte organizado' in browser.contents
+    False
+    >>> 'Reporte publicado' in browser.contents
+    False
+
+Volvemos a ingresar al sitio para mover en los estados a cada reporte:
+
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+    >>> browser.open(section_url)
+
+Todos los reportes son visibles:
+
+    >>> 'Reporte privado' in browser.contents
+    True
+    >>> 'Reporte revisado' in browser.contents
+    True
+    >>> 'Reporte rechazado' in browser.contents
+    True
+    >>> 'Reporte editado' in browser.contents
+    True
+    >>> 'Reporte organizado' in browser.contents
+    True
+    >>> 'Reporte publicado' in browser.contents
+    True
+
+Vamos a mover de estados a cada una:
+
+    >>> browser.getLink("Reporte revisado").click()
+    >>> browser.getLink('Set revised').click()
+    >>> browser.open(section_url)
+
+    >>> browser.getLink("Reporte rechazado").click()
+    >>> browser.getLink('Set revised').click()
+    >>> browser.getLink('Reject').click()
+    >>> browser.open(section_url)
+
+    >>> browser.getLink("Reporte editado").click()
+    >>> browser.getLink('Set revised').click()
+    >>> browser.getLink('Set edited').click()
+    >>> browser.open(section_url)
+
+    >>> browser.getLink("Reporte organizado").click()
+    >>> browser.getLink('Set revised').click()
+    >>> browser.getLink('Set edited').click()
+    >>> browser.getLink('Set organized').click()
+    >>> browser.open(section_url)
+
+    >>> browser.getLink("Reporte publicado").click()
+    >>> browser.getLink('Set revised').click()
+    >>> browser.getLink('Set edited').click()
+    >>> browser.getLink('Set organized').click()
+    >>> browser.getLink('Publish').click()
+
+Volvemos a la seccion y chequeamos que todos los reportes sigan siendo visibles
+
+    >>> browser.open(section_url)
+
+    >>> 'Reporte privado' in browser.contents
+    True
+    >>> 'Reporte revisado' in browser.contents
+    True
+    >>> 'Reporte rechazado' in browser.contents
+    True
+    >>> 'Reporte editado' in browser.contents
+    True
+    >>> 'Reporte organizado' in browser.contents
+    True
+    >>> 'Reporte publicado' in browser.contents
+    True
+
+Salimos nuevamente, y chequeamos que solo vemos el reporte publicado:
+
+    >>> browser.open(portalURL + '/logout')
+    >>> browser.open(section_url)
+
+    >>> 'Reporte privado' in browser.contents
+    False
+    >>> 'Reporte revisado' in browser.contents
+    False
+    >>> 'Reporte rechazado' in browser.contents
+    False
+    >>> 'Reporte editado' in browser.contents
+    False
+    >>> 'Reporte organizado' in browser.contents
+    False
+    >>> 'Reporte publicado' in browser.contents
+    True
