@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="telesur.reportero">
+
+<metal:styleslot fill-slot="style_slot" >
+
+        <link rel="stylesheet" type="text/css" media="screen" href=""
+              tal:attributes="href string:${context/absolute_url}/++resource++telesur.reportero/styles.css" />
+
+</metal:styleslot>
+
+<metal:javascriptslot fill-slot="javascript_head_slot" >
+
+        <script type="text/javascript" src="++resource++telesur.reportero/javascript.js">
+        </script>
+
+</metal:javascriptslot>
+
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+    <div class="ireport-banner">
+        <img src="++resource++telesur.reportero/soy_reportero.jpg" />
+    </div>
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+        <div class="anonreport-pic" tal:define="picture nocall:context/original_file"
+             tal:condition="nocall:picture">
+            <img tal:attributes="src string:${context/absolute_url}/@@download/original_file/${picture/filename};"
+                />
+            <div class="anonreport-date" tal:content="context/date"></div>
+        </div>
+        <div class="anonreport-description" tal:content="context/description"></div>
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

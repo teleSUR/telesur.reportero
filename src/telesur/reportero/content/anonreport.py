@@ -4,7 +4,9 @@ from five import grok
 
 from plone.dexterity.content import Item
 
-from plone.directives import form
+from plone.directives import dexterity, form
+
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.namedfile.field import NamedBlobFile
 
@@ -71,3 +73,11 @@ def redirect_after_add(obj, event):
     """
     parent = obj.aq_inner.aq_parent
     obj.REQUEST.RESPONSE.redirect(parent.absolute_url())
+
+class View(dexterity.DisplayForm):
+    grok.context(IAnonReport)
+    grok.require('zope2.View')
+
+    def render(self):
+        pt = ViewPageTemplateFile('ianonreport_templates/ianonreport_view.pt')
+        return pt(self)

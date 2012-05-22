@@ -1,0 +1,36 @@
+.ireport-banner {
+    margin-left: 50px;
+}
+
+.anonreport-pic {
+    width: 400px;
+    float: left;
+}
+
+.anonreport-pic img {
+   max-width: 100%;
+}
+
+.anonreport-description {
+    margin-left: 410px;
+    font-size: 14px;
+}
+
+.portaltype-telesur-reportero-anonreport h1 {
+    margin-bottom: 10px;
+}
+
+/*
+
+LISTREPORT VIEW
+
+*/
+
+.report-item-pic {
+    width: 100px;
+    float: left;
+}
+
+.report-item-pic img {
+    width: 100%;
+}

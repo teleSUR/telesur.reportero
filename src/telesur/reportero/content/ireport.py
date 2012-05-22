@@ -28,22 +28,32 @@ class View(dexterity.DisplayForm):
     def can_edit(self):
         return checkPermission('cmf.ModifyPortalContent', self.context)
 
-    def _get_catalog_results(self, state):
+    def _get_catalog_results(self, state=None):
         pc = getToolByName(self.context, 'portal_catalog')
 
         ct = "telesur.reportero.anonreport"
         path='/'.join(self.context.getPhysicalPath())
         sort_on='Date'
         sort_order='reverse'
-
-        results = pc.unrestrictedSearchResults(portal_type=ct,
+        if state:
+            results = pc.unrestrictedSearchResults(portal_type=ct,
                                                review_state=state,
                                                sort_on=sort_on,
                                                sort_order=sort_order,
                                                path=path)
+        else:
+            results = pc.unrestrictedSearchResults(portal_type=ct,
+                                               sort_on=sort_on,
+                                               sort_order=sort_order,
+                                               path=path)
+            
 
         return results
 
+    def get_all_reports(self):
+        reports = self._get_catalog_results()
+        return reports
+        
     def get_published_reports(self):
         reports = self._get_catalog_results('published')
         return reports
@@ -55,3 +65,11 @@ class View(dexterity.DisplayForm):
         reports += self._get_catalog_results('edited')
         reports += self._get_catalog_results('organized')
         return reports
+
+class ListadoReportView(View):
+    grok.require('cmf.ModifyPortalContent')
+    grok.name('listado-report')
+    
+    def render(self):
+        pt = ViewPageTemplateFile('ireport_templates/listadoreport_view.pt')
+        return pt(self)
