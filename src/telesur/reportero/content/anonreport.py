@@ -20,6 +20,7 @@ from zope.interface import implements
 
 from zope.app.container.interfaces import IObjectAddedEvent
 
+from telesur.reportero.widgets.upload_widget import UploadFieldWidget
 
 class IAnonReport(form.Schema):
     """
@@ -31,13 +32,14 @@ class IAnonReport(form.Schema):
             description=_(u'help_status',
                           default=u'Select status.'),
         )
-
-    original_file = NamedBlobFile(
+    
+    form.widget(file_id=UploadFieldWidget)
+    file_id = schema.Text(
             title=_(u'File'),
-            description=_(u'help_original_file',
-                          default=u'Load here your image or video file.'),
-            required=True,
-        )
+             description=_(u'upload video or image'),
+             required=True,
+    )
+
 
     date = schema.Datetime(
             title=_(u'Date'),
@@ -47,15 +49,14 @@ class IAnonReport(form.Schema):
             required=True,
         )
 
-    form.omitted('edited_file')
-    form.no_omit(IEditForm, 'edited_file')
-    edited_file = NamedBlobFile(
+    form.omitted('edited_file_id')
+    form.no_omit(IEditForm, 'edited_file_id')
+    form.widget(file_id=UploadFieldWidget)
+    edited_file_id = schema.Text(
             title=_(u'Edited File'),
-            description=_(u'help_edited_file',
-                          default=(u'You can load here a modified '
-                                    'version of the original file.')),
-            required=False,
-        )
+             description=_(u'upload edited video or image'),
+             required=False,
+    )
 
 
 class AnonReport(Item):

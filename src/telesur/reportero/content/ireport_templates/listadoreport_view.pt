@@ -31,9 +31,7 @@
             <h2 i18n:translate="">Reports:</h2>
             <tal:reports repeat="brain view/get_all_reports">
             <div class="report-item" tal:define="report brain/getObject">
-              <div class="report-item-pic" tal:define="picture nocall:report/original_file">
-                <img tal:attributes="src string:${report/absolute_url}/@@download/original_file/${picture/filename};"
-                    />
+              <div class="report-item-pic">
               </div>
                 <a href="#" tal:attributes="href report/absolute_url"
                             tal:content="report/Title"

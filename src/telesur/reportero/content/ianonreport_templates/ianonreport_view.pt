@@ -28,10 +28,7 @@
         <img src="++resource++telesur.reportero/soy_reportero.jpg" />
     </div>
         <h1 class="documentFirstHeading" tal:content="context/title" />
-        <div class="anonreport-pic" tal:define="picture nocall:context/original_file"
-             tal:condition="nocall:picture">
-            <img tal:attributes="src string:${context/absolute_url}/@@download/original_file/${picture/filename};"
-                />
+        <div class="anonreport-pic">
             <div class="anonreport-date" tal:content="context/date"></div>
         </div>
         <div class="anonreport-description" tal:content="context/description"></div>
