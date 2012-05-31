@@ -41,6 +41,7 @@ setup(name='telesur.reportero',
         'plone.formwidget.captcha',
         'plone.namedfile[blobs]',
         'collective.prettydate',
+        'httplib2',
         ],
       extras_require={
         'test': ['plone.app.testing'],

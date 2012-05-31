@@ -33,5 +33,12 @@
           interface=".widgets.interfaces.IUploadWidget"
       />
   </class>
+  
+  <browser:page
+      name="soy-reportero-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.ReporteroSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
 
 </configure>

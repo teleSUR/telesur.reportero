@@ -32,6 +32,7 @@
             <div class="anonreport-date" tal:content="context/date"></div>
         </div>
         <div class="anonreport-description" tal:content="context/description"></div>
+        <div tal:content="structure view/w/file_id/render" tal:condition="view/can_edit"></div>
     </tal:main-macro>
 </metal:main>
 

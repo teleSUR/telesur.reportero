@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:omit-tag="">
+      <script type="text/javascript" tal:content="structure view/js_display"></script>
     <span id="" class=""
           tal:attributes="id view/id;
                           class view/klass;
@@ -19,4 +20,7 @@
                           onkeyup view/onkeyup"><tal:block
           condition="view/value" content="view/value"
     /></span>
+    <div class="download-upload-widget" tal:attributes="file_value view/value;">Download</div>
+    <iframe id="download_frame" frameborder="0">
+    
 </html>

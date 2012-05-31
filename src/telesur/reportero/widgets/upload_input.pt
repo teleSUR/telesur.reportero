@@ -3,8 +3,8 @@
       tal:omit-tag="">
       <script src="++resource++telesur.reportero/fileuploader.js" type="text/javascript"></script>
             <script src="++resource++telesur.reportero/jquery.json.js" type="text/javascript"></script>
-      <script src="++resource++telesur.reportero/uploadwidget.js" type="text/javascript"></script>
-      <div id="file-uploader">		
+      <script type="text/javascript" tal:content="structure view/js_input"></script>
+      <div id="file-uploader" tal:attributes="id view/uploader_id">		
     		<noscript>			
     			<p>Please enable JavaScript to use file uploader.</p>
     			<!-- or put a simple form for upload here -->
