@@ -25,6 +25,12 @@
     <tal:main-macro metal:define-macro="main">
 
         <h1 class="documentFirstHeading" tal:content="context/title" />
+        <div class="add-report-button">
+        <a href="#" tal:attributes="href string:${context/absolute_url}/++add++telesur.reportero.anonreport"
+                    tal:condition="view/can_add_reports"
+                    class="report-link edit-report"
+                    i18n:translate="">Add new report</a>
+        </div>
 
         <div class="published-reports-list" tal:define="video_api nocall:context/@@video_api">
             <h2 i18n:translate="">Reports:</h2>
@@ -76,11 +82,6 @@
             </div>
             </tal:reports>
         </div>
-
-        <a href="#" tal:attributes="href string:${context/absolute_url}/++add++telesur.reportero.anonreport"
-                    tal:condition="view/can_add_reports"
-                    class="report-link edit-report"
-                    i18n:translate="">Add new report</a>
 
     </tal:main-macro>
 </metal:main>

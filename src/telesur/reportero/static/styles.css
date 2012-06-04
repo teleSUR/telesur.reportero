@@ -117,6 +117,23 @@ REPORT VIEW (PUBLIC)
 }
 
 .anon-file-download {
-    clear:both;
-    
+    clear:both;   
+}
+
+#content .add-report-button a {
+    color: #990000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.add-report-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#content .add-report-button a:link {
+    border: 1px solid #990000;
+    border-radius: 10px 10px 10px 10px;
 }

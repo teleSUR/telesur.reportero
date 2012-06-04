@@ -10,6 +10,7 @@ from plone.i18n.normalizer import idnormalizer
 
 from telesur.reportero.controlpanel import IReporteroSettings
 
+
 class MultimediaConnect(object):
     
     def __init__(self):
@@ -58,6 +59,22 @@ class MultimediaConnect(object):
         http = httplib2.Http()
         response, content = http.request(url, 'POST', headers=headers, 
             body=urlencode(body))
+        content_json = json.loads(content)
+        return response, content_json
+    
+    def publish_structure(self, slug, file_type):
+        if file_type == "image":
+            url = self.multimedia_url() + '/imagen/'
+        else:
+            url = self.multimedia_url() + '/clip/'
+        headers = {'Accept': 'application/json'}
+        key = self.security_key()
+        body={'slug':slug, 'publicado':True}
+        sign_key = self.firma_request(body, self.key(), key)
+        body['signature'] = sign_key
+        http = httplib2.Http()
+        response, content = http.request(url, 'PUT', headers=headers, 
+            body=urlencode(body))
         return response
     
     def get_structure(self, slug, file_type):
@@ -71,7 +88,11 @@ class MultimediaConnect(object):
         sign_key = self.firma_request(body, self.key(), key)
         body['signature'] = sign_key
         headers = {'Accept': 'application/json'}
+        body_url = urlencode(body)
+        url = url + '?' + body_url
         response, content = http.request(url, 'GET', headers=headers, 
                 body=urlencode(body))
         content_json = json.loads(content)
+        if response['status'] == 200 and not content_json['publicado']:
+            self.publish_structure(slug, file_type)
         return response, content_json

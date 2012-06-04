@@ -87,6 +87,10 @@ class AnonReport(Item):
         body = {}
     
     def get_slug(self):
+        # if self.edited_file_slug:
+        #             return self.edited_file_slug
+        #         else:
+        #             return self.file_slug
         import random
         if random.randint(0, 1):
             return 'maestros-y-jovenes-continuan-manifestaciones-en-mexico'
@@ -114,6 +118,7 @@ class Edit(dexterity.EditForm):
 
     @button.buttonAndHandler(_(u'Save'))
     def handleSaveAndSend(self, action):
+        slug = None
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
@@ -134,12 +139,18 @@ class Edit(dexterity.EditForm):
             body['tipo'] = 'soy-reportero'
 
             multimedia_connect = MultimediaConnect()
-            response = multimedia_connect.create_structure(body, file_type)
-
-            if 'status' not in response.keys() or response['status'] != '200':
+            response, content = multimedia_connect.create_structure(body, file_type)
+            slug = None
+            if "slug" in content:
+                slug = content['slug']
+            if 'status' not in response.keys() or response['status'] != '200'\
+                or not slug:
                 raise ActionExecutionError(Invalid(_(u"Error creating the \
                     report, please try again")))
-            
+            data['edited_file_slug'] = slug
+            if slug:
+                self.context.edited_file_slug = slug
+                self.context.reindexObject()
         self.applyChanges(data)
         IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"),
             "info")
@@ -172,14 +183,24 @@ class Add(dexterity.AddForm):
         body['tipo'] = 'soy-reportero'
         
         multimedia_connect = MultimediaConnect()
-        response = multimedia_connect.create_structure(body, file_type)
+        response, content = multimedia_connect.create_structure(body, file_type)
 
         if 'status' not in response.keys() or response['status'] != '200':
             raise ActionExecutionError(Invalid(_(u"Error creating the report,\
                 please try again")))
+        slug = None
+        if "slug" in content:
+            slug = content['slug']
+        else:
+            raise ActionExecutionError(Invalid(_(u"Error creating the report,\
+                please try again")))
+
+        data['file_slug'] = slug
         obj = self.createAndAdd(data)
         if obj is not None:
             # mark only as finished if we get the new object
+            obj.file_slug = slug
+            obj.reindexObject()
             self._finishedAdd = True
             IStatusMessage(self.request).addStatusMessage(_(u"Item created"),
                 "info")

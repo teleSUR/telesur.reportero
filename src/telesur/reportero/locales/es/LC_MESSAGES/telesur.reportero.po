@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2012-05-02 03:36+0000\n"
+"POT-Creation-Date: 2012-06-04 16:12+0000\n"
 "PO-Revision-Date: 2012-05-02 00:39-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -17,52 +17,114 @@ msgstr ""
 "Language: es\n"
 "X-Generator: Lokalize 1.2\n"
 
-#: telesur/reportero/content/ireport_templates/ireport_view.pt:51
+#: telesur/reportero/profiles/default/types/telesur.reportero.ireport.xml
+msgid "A container for reports"
+msgstr "Contenedor de Reportes"
+
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:29
 msgid "Add new report"
 msgstr "Agregar un reporte nuevo"
 
-#: telesur/reportero/content/anonreport.py:41
+#: telesur/reportero/profiles/default/types/telesur.reportero.anonreport.xml
+msgid "An informative report addable by anybody"
+msgstr "Reporte informativo agregable por cuaquiera"
+
+#: telesur/reportero/profiles/default/types/telesur.reportero.anonreport.xml
+msgid "Anonymous report"
+msgstr "Reporte Anonimo"
+
+#: telesur/reportero/content/anonreport.py:144
+msgid "Changes saved"
+msgstr "Cambios Guardados"
+
+#: telesur/reportero/content/anonreport.py:53
 msgid "Date"
 msgstr "Fecha"
 
-#: telesur/reportero/content/anonreport.py:51
+#: telesur/reportero/content/anonreport.py:64
 msgid "Edited File"
 msgstr "Archivo Editado"
 
-#: telesur/reportero/content/anonreport.py:34
+#: telesur/reportero/content/anonreport.py:127
+msgid "Error creating the                     report, please try again"
+msgstr "Error creando el reporte, por favor pruebe de nuevo"
+
+#: telesur/reportero/content/anonreport.py:166
+msgid "Error creating the report,                please try again"
+msgstr ""Error creando el reporte, por favor pruebe de nuevo"
+
+#: telesur/reportero/widgets/upload_widget.py:73
+msgid "Error uploading file, please try again or use a diferent file"
+msgstr ""Error cargando el archivo, por favor pruebe de nuevo o use un archivo diferente"
+
+#: telesur/reportero/content/anonreport.py:44
 msgid "File"
 msgstr "Archivo"
 
-#: telesur/reportero/content/ireport_templates/ireport_view.pt:42
+#: telesur/reportero/widgets/upload_widget.py:74
+msgid "File uploaded correctly"
+msgstr "Archivo cargado correctamente"
+
+#: telesur/reportero/controlpanel.py:37
+msgid "Here you can modify the settings for telesur.reportero."
+msgstr "Aqui puede modificar la configuracion de telesur.reportero"
+
+#: telesur/reportero/profiles/default/types/telesur.reportero.ireport.xml
+msgid "I report section"
+msgstr "Sección Soy Reportero"
+
+#: telesur/reportero/content/anonreport.py:184
+msgid "Item created"
+msgstr "Reporte Creado"
+
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:75
 msgid "Not published reports:"
 msgstr "Reportes no publicados:"
 
-#: telesur/reportero/content/ireport_templates/ireport_view.pt:31
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:36
+#: telesur/reportero/content/ireport_templates/listadoreport_view.pt:31
 msgid "Reports:"
 msgstr "Reportes:"
 
-#: telesur/reportero/content/anonreport.py:28
+#: telesur/reportero/content/anonreport.py:115
+msgid "Save"
+msgstr "Guardar"
+
+#: telesur/reportero/controlpanel.py:36
+msgid "Soy Reportero Settings"
+msgstr "Configuración de Soy Reportero"
+
+#: telesur/reportero/content/anonreport.py:36
 msgid "Status"
 msgstr "Estado"
 
+#: telesur/reportero/controlpanel.py:25
+msgid "Upload key"
+msgstr "LLave para la subida de archivos"
+
+#: telesur/reportero/controlpanel.py:15
+msgid "Upload url"
+msgstr "Url para la subida de archivos"
+
 #. Default: "Enter here the date in which this photo or video was taken."
-#: telesur/reportero/content/anonreport.py:42
+#: telesur/reportero/content/anonreport.py:54
 msgid "help_date"
 msgstr "Ingrese aquí la fecha en la que fue tomado este video o foto."
 
-#. Default: "You can load here a modified version of the original file."
-#: telesur/reportero/content/anonreport.py:52
-msgid "help_edited_file"
-msgstr "Puede cargar aquí una versión modificada del archivo original."
-
-#. Default: "Load here your image or video file."
-#: telesur/reportero/content/anonreport.py:35
-msgid "help_original_file"
-msgstr "Cargue aquí su archivo de imagen o video."
-
 #. Default: "Select status."
-#: telesur/reportero/content/anonreport.py:29
+#: telesur/reportero/content/anonreport.py:37
 msgid "help_status"
 msgstr "Seleccione el estado."
 
+#: telesur/reportero/profiles/default/controlpanel.xml
+msgid "soy reportero Settings"
+msgstr "Configuración de Soy Reportero"
+
+#: telesur/reportero/content/anonreport.py:65
+msgid "upload edited video or image"
+msgstr "Cargar archivo editado"
+
+#: telesur/reportero/content/anonreport.py:45
+msgid "upload video or image"
+msgstr "Cargar imagen o video"
 
