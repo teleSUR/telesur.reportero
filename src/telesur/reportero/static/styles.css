@@ -11,6 +11,12 @@
    max-width: 100%;
 }
 
+.anonreport-media {
+    width: 400px;
+    height: 225px;
+    border: 1px solid red;
+}
+
 .anonreport-description {
     margin-left: 410px;
     font-size: 14px;
@@ -33,4 +39,84 @@ LISTREPORT VIEW
 
 .report-item-pic img {
     width: 100%;
+}
+
+/*
+REPORT VIEW (PUBLIC)
+*/
+
+.report-item {
+    width: 140px;
+    float: left;
+}
+
+.report-item-thumb {
+}
+
+#report-items-carousel {
+    width: 100%;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    position:relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#report-reports,
+#report-arrow-left,
+#report-arrow-right {
+    float: left;
+}
+
+#report-reports {
+    width: 847px;
+    position: relative;
+    left: 10px;
+}
+
+#report-arrow-left a {
+    padding: 15px;
+    position: relative;
+    top: 35px;
+    background: url("++resource++telesur.reportero/prev.png") no-repeat scroll 0 0 transparent;
+}
+
+#report-arrow-right a {
+    padding: 15px;
+    position: relative;
+    top: 35px;
+    background: url("++resource++telesur.reportero/next.png") no-repeat scroll 0 0 transparent;
+}
+
+#content #report-arrow-right a:link,
+#content #report-arrow-left a:link {
+    border:0;
+}
+
+.main-report {
+    margin-bottom: 30px;
+}
+
+#main-report-media {
+    width: 400px;
+    border: 1px solid red;
+    float: left;
+}
+
+#main-report-title {
+    color: #990000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    margin-bottom: 25px;
+}
+
+#main-report-data {
+    margin-left: 415px;
+}
+
+.anon-file-download {
+    clear:both;
+    
 }

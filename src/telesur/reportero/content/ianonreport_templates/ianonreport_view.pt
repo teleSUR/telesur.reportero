@@ -28,11 +28,66 @@
         <img src="++resource++telesur.reportero/soy_reportero.jpg" />
     </div>
         <h1 class="documentFirstHeading" tal:content="context/title" />
-        <div class="anonreport-pic">
+        <div class="anonreport-pic" tal:define="video_api nocall:context/@@video_api">
+          <div class="anonreport-media">
+            <script type="text/javascript" src=""
+                tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':context.get_file_url()})"                            
+                tal:attributes="src string:${video_url};"
+                tal:content="nothing">
+                Item Title
+            </script>
+          </div>
             <div class="anonreport-date" tal:content="context/date"></div>
         </div>
         <div class="anonreport-description" tal:content="context/description"></div>
-        <div tal:content="structure view/w/file_id/render" tal:condition="view/can_edit"></div>
+        <div syle="clear:both"></div>
+        <div class="anon-file-download" tal:condition="view/can_edit">
+          <a tal:attributes="href context/get_file_url">Descargar Archivo Original</a>
+        </div>
+        
+        
+<!-- discuss         -->
+        
+        <script type="text/javascript">
+               var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+            </script>
+          
+<table width="249" border="0">
+<tr>
+  <td width="34"><a href="#"  onclick="NewWindow('++theme++telesur.theme/condiciones.html', 'Condiciones de Publicacion','500','590','yes'); return false;"><img src="++theme++telesur.theme/img/icon_comentarios.jpg"  width="34" height="34" border="0"  align="absmiddle"  /> </a></td>
+  
+</tr>
+</table>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'telesurtesting'; // required: replace example with your forum shortname
+                var disqus_developer = 1;
+                /* var disqus_identifier= 'c4a07a5b-676b-419b-9c99-eb0123e48bf2'; */
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                })();
+
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </tal:main-macro>
 </metal:main>
 

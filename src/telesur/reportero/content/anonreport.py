@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-import httplib2
-import hashlib
-from urllib import urlencode
-
 from zope import schema
-import zope.component
 from zope.interface import implements
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.security import checkPermission
@@ -22,21 +17,21 @@ from plone.dexterity.content import Item
 from plone.dexterity.events import EditFinishedEvent
 from plone.directives import dexterity, form
 from plone.namedfile.field import NamedBlobFile
-from plone.registry.interfaces import IRegistry
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 
 from telesur.reportero import _
 from telesur.reportero.widgets.upload_widget import UploadFieldWidget
-from telesur.reportero.controlpanel import IReporteroSettings
+from telesur.reportero.multimedia_connect import MultimediaConnect
+
 
 
 class IAnonReport(form.Schema):
     """
     A report that any site visitor can add.
     """
-
+        
     status = schema.Bool(
             title=_(u'Status'),
             description=_(u'help_status',
@@ -54,7 +49,7 @@ class IAnonReport(form.Schema):
     form.omitted('file_slug')
     file_slug = schema.Text(required=False)
 
-    date = schema.Date(
+    date = schema.Datetime(
             title=_(u'Date'),
             description=_(u'help_date',
                           default=(u'Enter here the date in which this photo '
@@ -90,29 +85,27 @@ class AnonReport(Item):
         if self.edited_file_slug:
             slug = self.edited_file_slug
         body = {}
-            
+    
+    def get_slug(self):
+        import random
+        if random.randint(0, 1):
+            return 'maestros-y-jovenes-continuan-manifestaciones-en-mexico'
+        else:
+            return 'telesur-noticias-85776'
 
-def firma_request(params_dict, key, secret):
-    params_dict['key'] = key
-    cadena = u'%s' % secret
-    for name in sorted(params_dict.iterkeys()):
-        cadena += u'%s%s' % (name, params_dict[name])
-    return hashlib.md5(cadena).hexdigest()
-
-def get_multimedia_url():
-    registry = zope.component.getUtility(IRegistry)
-    settings = registry.forInterface(IReporteroSettings)
-    return settings.multimedia_url
-
-def get_security_key():
-    registry = zope.component.getUtility(IRegistry)
-    settings = registry.forInterface(IReporteroSettings)
-    return settings.security_key
-
-def get_key():
-    registry = zope.component.getUtility(IRegistry)
-    settings = registry.forInterface(IReporteroSettings)
-    return settings.key
+    def get_file_url(self):
+        multimedia_connect = MultimediaConnect()
+        response, content = multimedia_connect.get_structure(
+            self.get_slug(), 'video')
+        if response['status'] == '200' and 'archivo_url' in content:
+            return content['archivo_url']
+    
+    def get_thumb_image(self):
+        multimedia_connect = MultimediaConnect()
+        response, content = multimedia_connect.get_structure(
+            self.get_slug(),'video')
+        if response['status'] == '200' and 'thumbnail_pequeno' in content:
+            return content['thumbnail_pequeno']
 
 class Edit(dexterity.EditForm):
     """ Default edit for Ideas
@@ -125,12 +118,14 @@ class Edit(dexterity.EditForm):
         if errors:
             self.status = self.formErrorsMessage
             return
-        if 'edited_file_id' in data.keys() and self.context.edited_file_id != data['edited_file_id']:
+        if 'edited_file_id' in data.keys() and \
+            self.context.edited_file_id != data['edited_file_id']:
             body = {}
             if 'file_type' in data.keys():
                 file_type = data['file_type']
             else:
-                raise ActionExecutionError(Invalid(_(u"Error creating the report, please try again")))
+                raise ActionExecutionError(Invalid(_(u"Error creating the \
+                    report, please try again")))
             if 'IBasic.title' in data.keys():
                 body['titulo'] = data['IBasic.title']
             if 'IBasic.description' in data.keys():
@@ -138,21 +133,16 @@ class Edit(dexterity.EditForm):
             body['archivo'] = data['edited_file_id']
             body['tipo'] = 'soy-reportero'
 
-            if file_type == "image":
-                url = get_multimedia_url + '/imagen/'
-            else:
-                url = get_multimedia_url + '/clip/'
-            headers = {'Accept': 'application/json'}
-            key = get_security_key()
-            sign_key = firma_request(body, get_key(), key)
-            body['signature'] = sign_key
-            http = httplib2.Http()
-            response, content = http.request(url, 'POST', headers=headers, body=urlencode(body))
+            multimedia_connect = MultimediaConnect()
+            response = multimedia_connect.create_structure(body, file_type)
+
             if 'status' not in response.keys() or response['status'] != '200':
-                raise ActionExecutionError(Invalid(_(u"Error creating the report, please try again")))
+                raise ActionExecutionError(Invalid(_(u"Error creating the \
+                    report, please try again")))
             
         self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"), "info")
+        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"),
+            "info")
         self.request.response.redirect(self.nextURL())
         notify(EditFinishedEvent(self.context))
 
@@ -173,32 +163,26 @@ class Add(dexterity.AddForm):
         if 'file_type' in data.keys():
             file_type = data['file_type']
         else:
-            raise ActionExecutionError(Invalid(_(u"Error creating the report, please try again")))
+            raise ActionExecutionError(Invalid(_(u"Error creating the report,\
+                please try again")))
         if 'IBasic.title' in data.keys():
-            body['titulo'] = data['IBasic.title']
-        if 'IBasic.description' in data.keys():
-            body['descripcion'] = data['IBasic.description']
+            body['titulo'] = data['IBasic.title'].encode("utf-8", "ignore")
         if 'file_id' in data.keys():
             body['archivo'] = data['file_id']
         body['tipo'] = 'soy-reportero'
         
-        if file_type == "image":
-            url = get_multimedia_url + '/imagen/'
-        else:
-            url = get_multimedia_url + '/clip/'
-        headers = {'Accept': 'application/json'}
-        key = get_security_key()
-        sign_key = firma_request(body, get_key(), key)
-        body['signature'] = sign_key
-        http = httplib2.Http()
-        response, content = http.request(url, 'POST', headers=headers, body=urlencode(body))
+        multimedia_connect = MultimediaConnect()
+        response = multimedia_connect.create_structure(body, file_type)
+
         if 'status' not in response.keys() or response['status'] != '200':
-            raise ActionExecutionError(Invalid(_(u"Error creating the report, please try again")))
+            raise ActionExecutionError(Invalid(_(u"Error creating the report,\
+                please try again")))
         obj = self.createAndAdd(data)
         if obj is not None:
             # mark only as finished if we get the new object
             self._finishedAdd = True
-            IStatusMessage(self.request).addStatusMessage(_(u"Item created"), "info")
+            IStatusMessage(self.request).addStatusMessage(_(u"Item created"),
+                "info")
 
         return obj
 
@@ -214,6 +198,10 @@ def redirect_after_add(obj, event):
 class View(dexterity.DisplayForm):
     grok.context(IAnonReport)
     grok.require('zope2.View')
+    
+    def update(self):
+        multimedia_connect = MultimediaConnect()
+        multimedia_connect.get_structure('maestros-y-jovenes-continuan-manifestaciones-en-mexico','video')
     
     def can_edit(self):
         permission = 'cmf.ModifyPortalContent'

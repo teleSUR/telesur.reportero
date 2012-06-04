@@ -5,18 +5,12 @@ import zope.schema.interfaces
 from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
 from z3c.form.browser.text import TextWidget
-from plone.registry.interfaces import IRegistry
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from telesur.reportero import _
-from telesur.reportero.controlpanel import IReporteroSettings
+from telesur.reportero.multimedia_connect import MultimediaConnect
 
-
-def get_url():
-    registry = zope.component.getUtility(IRegistry)
-    settings = registry.forInterface(IReporteroSettings)
-    return settings.upload_url
 
 class UploadWidget(TextWidget):
     """Input type upload widget implementation."""
@@ -24,7 +18,6 @@ class UploadWidget(TextWidget):
     display_template = ViewPageTemplateFile('upload_display.pt')
     
     klass = u'upload-widget'
-    
     
     # JavaScript template
     js_template_input = """\
@@ -46,6 +39,7 @@ class UploadWidget(TextWidget):
                  var file_id = result['id'];
                  $('#%(id)s').val(file_id);
                  $('#%(id_uploader)s').css("display", "none");
+                 $("#formfield-%(id)s .formHelp").text("%(upload_success)s: " + filename);
                  if(endsWith(filename,"jpg") || endsWith(filename,"gif") ||
                  endsWith(filename,"png") || endsWith(filename,"jpeg") ||
                  endsWith(filename,"JPG") || endsWith(filename,"GIF") ||
@@ -74,13 +68,18 @@ class UploadWidget(TextWidget):
     """
 
     def js_input(self):
+        multimedia_connect = MultimediaConnect()
+        url = multimedia_connect.upload_url()
         upload_error = _(u"Error uploading file, please try again or use a diferent file")
+        upload_success = _(u"File uploaded correctly")
         return self.js_template_input % dict(id=self.id, 
-            id_uploader=self.uploader_id(), upload_url=get_url(),
-            upload_error=upload_error)
+            id_uploader=self.uploader_id(), upload_url=url,
+            upload_error=upload_error, upload_success=upload_success)
     
     def js_display(self):
-        return self.js_template_display % dict(upload_url=get_url())
+        multimedia_connect = MultimediaConnect()
+        url = multimedia_connect.upload_url()
+        return self.js_template_display % dict(upload_url=url)
     
     def uploader_id(self):
         return self.id + "-uploader"
@@ -97,4 +96,3 @@ class UploadWidget(TextWidget):
 def UploadFieldWidget(field, request):
     """IFieldWidget factory for UploadWidget."""
     return FieldWidget(field, UploadWidget(request))
-    

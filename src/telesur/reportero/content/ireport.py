@@ -15,11 +15,31 @@ class IIReport(form.Schema):
     A section that contains reports
     """
 
+BACH_SIZE = 6
 
 class View(dexterity.DisplayForm):
     grok.context(IIReport)
     grok.require('zope2.View')
-
+    
+    def update(self):
+        self.actual = 0
+        publics = self.get_published_reports()
+        if 'action' in self.request.keys():
+            action = self.request['action']
+            if action == 'next':
+                self.actual = int(self.request['actual'])
+                if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
+                    self.actual += 1
+            elif action == 'next':
+                self.actual = int(self.request['actual'])
+                if self.actual > 0:
+                    self.actual -= 1
+        
+        self.publics = publics[self.actual*BACH_SIZE:(self.actual+1)*BACH_SIZE]
+        self.main_report_new = None
+        if self.publics:
+            self.main_report_new = self.publics[0]
+        
     def render(self):
         pt = ViewPageTemplateFile('ireport_templates/ireport_view.pt')
         return pt(self)

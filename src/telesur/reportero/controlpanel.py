@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from zope import schema
 from zope.interface import Interface
 
@@ -32,12 +31,10 @@ class IReporteroSettings(Interface):
             default=u'telesursoyreporteroplonepruebas',
             required=True)
 
-class ReporteroettingsEditForm(controlpanel.RegistryEditForm):
+class ReporteroSettingsEditForm(controlpanel.RegistryEditForm):
     schema = IReporteroSettings
     label = _(u'Soy Reportero Settings')
     description = _(u'Here you can modify the settings for telesur.reportero.')
 
-
-
 class ReporteroSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = ReporteroettingsEditForm
+    form = ReporteroSettingsEditForm
