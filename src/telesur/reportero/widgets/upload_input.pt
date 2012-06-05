@@ -4,11 +4,11 @@
       <script src="++resource++telesur.reportero/fileuploader.js" type="text/javascript"></script>
             <script src="++resource++telesur.reportero/jquery.json.js" type="text/javascript"></script>
       <script type="text/javascript" tal:content="structure view/js_input"></script>
-      <div id="file-uploader" tal:attributes="id view/uploader_id">		
-    		<noscript>			
-    			<p>Please enable JavaScript to use file uploader.</p>
+      <div id="file-uploader" tal:attributes="id view/uploader_id">
+    		<noscript>
+    			<p i18n:translate="">Please enable JavaScript to use file uploader.</p>
     			<!-- or put a simple form for upload here -->
-    		</noscript>         
+    		</noscript>
     	</div>
       <div id="upload-result"></div>
     <input id="" name="" class="" title="" lang="" disabled=""

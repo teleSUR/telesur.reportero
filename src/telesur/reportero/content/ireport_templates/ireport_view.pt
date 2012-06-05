@@ -46,7 +46,7 @@
               <div id="main-report-media">
                 <tal:video condition="python:file_url and not new_report.is_image()">
                   <script type="text/javascript" src=""
-                      tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"                            
+                      tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"
                       tal:attributes="src string:${video_url};"
                       tal:content="nothing">
                       Item Title
@@ -55,7 +55,7 @@
                   <tal:image condition="python:file_url and new_report.is_image()">
                   <img tal:attributes="src file_url"/>
                   </tal:image>
-                  
+
               </div>
               <div id="main-report-data">
                 <a id="main-report-title" tal:content="python:report_main.Title" tal:attributes="href new_report/absolute_url"></a>
@@ -70,7 +70,7 @@
             </tal:comments>
             </div>
             <div id="report-items-carousel">
-              <div id="report-arrow-left"><a tal:attributes="href python:context.absolute_url() + '?action=prev&actual='+ str(view.actual)"></a></div>
+              <div id="report-arrow-left"><a tal:attributes="href python:context.absolute_url() + '?action=prev&amp;actual='+ str(view.actual)"></a></div>
               <div id="report-reports">
               <tal:reports repeat="brain view/publics">
               <div class="report-item" tal:define="report brain/getObject">
@@ -85,7 +85,7 @@
               </tal:reports>
               <div style="clear:both"></div>
               </div>
-              <div id="report-arrow-right"><a tal:attributes="href python:context.absolute_url() + '?action=next&actual='+str(view.actual)"></a></div>
+              <div id="report-arrow-right"><a tal:attributes="href python:context.absolute_url() + '?action=next&amp;actual='+str(view.actual)"></a></div>
               <div style="clear:both"></div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-05 12:58+0000\n"
+"POT-Creation-Date: 2012-06-05 20:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,12 +37,16 @@ msgstr ""
 msgid "Changes saved"
 msgstr ""
 
-#: telesur/reportero/content/ireport_templates/ireport_view.pt:68
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:69
 msgid "Comments"
 msgstr ""
 
 #: telesur/reportero/content/anonreport.py:58
 msgid "Date"
+msgstr ""
+
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:55
+msgid "Download original file"
 msgstr ""
 
 #: telesur/reportero/content/anonreport.py:69
@@ -85,6 +89,10 @@ msgstr ""
 msgid "Non Published Reports"
 msgstr ""
 
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:102
+msgid "Please enable JavaScript to view the ${disqus-link}"
+msgstr ""
+
 #: telesur/reportero/content/anonreport.py:139
 msgid "Save"
 msgstr ""
@@ -103,6 +111,10 @@ msgstr ""
 
 #: telesur/reportero/controlpanel.py:15
 msgid "Upload url"
+msgstr ""
+
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:108
+msgid "blog comments powered by ${disqus}"
 msgstr ""
 
 #. Default: "Enter here the date in which this photo or video was taken."

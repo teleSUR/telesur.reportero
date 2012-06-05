@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2012-06-05 12:58+0000\n"
-"PO-Revision-Date: 2012-05-02 00:39-0300\n"
+"POT-Creation-Date: 2012-06-05 20:42+0000\n"
+"PO-Revision-Date: 2012-06-05 17:43-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -37,13 +37,17 @@ msgstr "Reporte Anonimo"
 msgid "Changes saved"
 msgstr "Cambios Guardados"
 
-#: telesur/reportero/content/ireport_templates/ireport_view.pt:68
+#: telesur/reportero/content/ireport_templates/ireport_view.pt:69
 msgid "Comments"
 msgstr "Comentarios"
 
 #: telesur/reportero/content/anonreport.py:58
 msgid "Date"
 msgstr "Fecha"
+
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:55
+msgid "Download original file"
+msgstr "Descargar archivo original"
 
 #: telesur/reportero/content/anonreport.py:69
 msgid "Edited File"
@@ -55,11 +59,13 @@ msgstr "Error creando el reporte, por favor pruebe de nuevo"
 
 #: telesur/reportero/content/anonreport.py:197
 msgid "Error creating the report,                please try again"
-msgstr ""Error creando el reporte, por favor pruebe de nuevo"
+msgstr "\"Error creando el reporte, por favor pruebe de nuevo"
 
 #: telesur/reportero/widgets/upload_widget.py:73
 msgid "Error uploading file, please try again or use a diferent file"
-msgstr ""Error cargando el archivo, por favor pruebe de nuevo o use un archivo diferente"
+msgstr ""
+"\"Error cargando el archivo, por favor pruebe de nuevo o use un archivo "
+"diferente"
 
 #: telesur/reportero/content/anonreport.py:49
 msgid "File"
@@ -85,6 +91,10 @@ msgstr "Reporte Creado"
 msgid "Non Published Reports"
 msgstr "Reportes no publicados"
 
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:102
+msgid "Please enable JavaScript to view the ${disqus-link}"
+msgstr "Por favor active Javascript para ver ${disqus-link}"
+
 #: telesur/reportero/content/anonreport.py:139
 msgid "Save"
 msgstr "Guardar"
@@ -104,6 +114,10 @@ msgstr "LLave para la subida de archivos"
 #: telesur/reportero/controlpanel.py:15
 msgid "Upload url"
 msgstr "Url para la subida de archivos"
+
+#: telesur/reportero/content/ianonreport_templates/ianonreport_view.pt:108
+msgid "blog comments powered by ${disqus}"
+msgstr "comentarios de blog provistos por ${disqus}"
 
 #. Default: "Enter here the date in which this photo or video was taken."
 #: telesur/reportero/content/anonreport.py:59
@@ -126,4 +140,5 @@ msgstr "Cargar archivo editado"
 #: telesur/reportero/content/anonreport.py:50
 msgid "upload video or image"
 msgstr "Cargar imagen o video"
+
 

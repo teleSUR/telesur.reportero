@@ -32,7 +32,7 @@
           <div class="anonreport-media">
             <tal:video condition="python:file_url and not context.is_image()">
             <script type="text/javascript" src=""
-                tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"                            
+                tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"
                 tal:attributes="src string:${video_url};"
                 tal:content="nothing">
                 Item Title
@@ -49,15 +49,16 @@
           <div id="main-report-description" tal:content="context/description"></div>
         </div>
         <div style="clear: both"></div>
-        
-        
+
+
         <div class="anon-file-download" tal:condition="view/can_edit">
-          <a tal:attributes="href file_url">Descargar Archivo Original</a>
+          <a tal:attributes="href file_url"
+             i18n:translate="">Download original file</a>
         </div>
-        
-        
+
+
 <!-- discuss         -->
-        
+
         <script type="text/javascript">
                var win = null;
 function NewWindow(mypage,myname,w,h,scroll){
@@ -69,11 +70,11 @@ win = window.open(mypage,myname,settings)
 }
 
             </script>
-          
+
 <table width="249" border="0">
 <tr>
   <td width="34"><a href="#"  onclick="NewWindow('++theme++telesur.theme/condiciones.html', 'Condiciones de Publicacion','500','590','yes'); return false;"><img src="++theme++telesur.theme/img/icon_comentarios.jpg"  width="34" height="34" border="0"  align="absmiddle"  /> </a></td>
-  
+
 </tr>
 </table>
             <div id="disqus_thread"></div>
@@ -96,8 +97,16 @@ win = window.open(mypage,myname,settings)
                 })();
 
             </script>
-            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+            <noscript>
+                <span i18n:translate="">Please enable JavaScript to view the
+                    <a href="http://disqus.com/?ref_noscript"
+                       i18n:name="disqus-link">comments powered by Disqus.</a>
+                </span>
+            </noscript>
+            <a href="http://disqus.com"
+               class="dsq-brlink"
+               i18n:translate="">blog comments powered by <span class="logo-disqus"
+                                                                i18n:name="disqus">Disqus</span></a>
             </tal:report>
     </tal:main-macro>
 </metal:main>
