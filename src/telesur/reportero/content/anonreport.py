@@ -127,9 +127,9 @@ class AnonReport(Item):
         date_utility = getUtility(IPrettyDate)
         return date_utility.date(self.date)
 
-@form.default_value(field = IExcludeFromNavigation['exclude_from_nav'])
-def excludeFromNavDefaultValue(data):
-    return data.request.URL.endswith('++add++telesur.reportero.anonreport')
+# @form.default_value(field = IExcludeFromNavigation['exclude_from_nav'])
+# def excludeFromNavDefaultValue(data):
+#     return data.request.URL.endswith('++add++telesur.reportero.anonreport')
 
 class Edit(dexterity.EditForm):
     """ Default edit for Ideas

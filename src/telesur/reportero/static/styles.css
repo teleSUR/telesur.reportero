@@ -179,3 +179,7 @@ REPORTS LIST
 td.report-item-list-title {
     width:400px;
 }
+
+.arrows-list {
+    height: 53px;
+}

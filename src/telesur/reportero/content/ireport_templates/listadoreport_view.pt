@@ -42,7 +42,7 @@
             </tr>
             </tal:reports>
             </table>
-            <div class="arrows">
+            <div class="arrows-list">
               <span id="report-arrow-left-list" tal:attributes="class python:view.actual != 0 and 'show'"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=prev&actual='+ str(view.actual)"></a></span>
               <span id="report-arrow-right-list" tal:attributes="class python:view.actual != view.total and 'show'"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=next&actual='+str(view.actual)"></a></span>
               <div style="clear:both"></div>
