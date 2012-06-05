@@ -5,6 +5,7 @@ from zope.app.container.interfaces import IObjectAddedEvent
 from zope.security import checkPermission
 from zope.interface import Invalid
 from zope.event import notify
+from zope.component import getUtility
 
 from z3c.form import button
 from z3c.form.interfaces import ActionExecutionError
@@ -19,8 +20,11 @@ from plone.dexterity.events import EditFinishedEvent
 from plone.directives import dexterity, form
 from plone.namedfile.field import NamedBlobFile
 
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
+
+from collective.prettydate.interfaces import IPrettyDate
 
 from telesur.reportero import _
 from telesur.reportero.widgets.upload_widget import UploadFieldWidget
@@ -111,6 +115,17 @@ class AnonReport(Item):
         if response['status'] == '200' and 'thumbnail_pequeno' in content:
             return content['thumbnail_pequeno']
         return None
+    
+    def get_status(self):
+        workflowTool = getToolByName(self, "portal_workflow")
+        chain = workflowTool.getChainForPortalType(self.portal_type)
+        status = workflowTool.getStatusOf(chain[0], self)
+        state = status["review_state"]
+        return state
+    
+    def get_date(self):
+        date_utility = getUtility(IPrettyDate)
+        return date_utility.date(self.date)
 
 @form.default_value(field = IExcludeFromNavigation['exclude_from_nav'])
 def excludeFromNavDefaultValue(data):

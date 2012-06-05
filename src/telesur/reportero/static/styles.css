@@ -60,6 +60,7 @@ REPORT VIEW (PUBLIC)
     position:relative;
     padding-top: 10px;
     padding-bottom: 10px;
+    min-height: 65px;
 }
 
 #report-reports,
@@ -74,18 +75,30 @@ REPORT VIEW (PUBLIC)
     left: 10px;
 }
 
+#report-arrow-left-list a,
 #report-arrow-left a {
     padding: 15px;
     position: relative;
     top: 35px;
-    background: url("++resource++telesur.reportero/prev.png") no-repeat scroll 0 0 transparent;
+    background: url("++resource++telesur.reportero/prev.png") no-repeat scroll -98px 0 transparent;
 }
 
+#report-arrow-right-list a,
 #report-arrow-right a {
     padding: 15px;
     position: relative;
     top: 35px;
+    background: url("++resource++telesur.reportero/next.png") no-repeat scroll -98px 0 transparent;
+}
+
+#report-arrow-right-list.show a,
+#report-arrow-right.show a {
     background: url("++resource++telesur.reportero/next.png") no-repeat scroll 0 0 transparent;
+}
+
+#report-arrow-left-list.show a,
+#report-arrow-left.show a {
+    background: url("++resource++telesur.reportero/prev.png") no-repeat scroll 0 0 transparent;
 }
 
 #content #report-arrow-right a:link,
@@ -94,7 +107,7 @@ REPORT VIEW (PUBLIC)
 }
 
 .main-report {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #main-report-media {
@@ -104,12 +117,27 @@ REPORT VIEW (PUBLIC)
     float: left;
 }
 
-#main-report-title {
+#content a#main-report-title:link {
     color: #990000;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: bold;
     line-height: 18px;
+    margin-bottom: 25px;
+    border:0;
+}
+
+#content #main-report-comments a:link {
+    color: #990000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+    margin-bottom: 25px;
+    border:0;
+}
+
+#content #main-report-comments {
     margin-bottom: 25px;
 }
 
@@ -137,4 +165,17 @@ REPORT VIEW (PUBLIC)
 #content .add-report-button a:link {
     border: 1px solid #990000;
     border-radius: 10px 10px 10px 10px;
+}
+
+
+/*
+REPORTS LIST
+*/
+
+.reports-list td {
+    padding: 3px 10px;
+}
+
+td.report-item-list-title {
+    width:400px;
 }

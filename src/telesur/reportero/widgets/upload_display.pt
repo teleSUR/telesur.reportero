@@ -21,6 +21,6 @@
           condition="view/value" content="view/value"
     /></span>
     <div class="download-upload-widget" tal:attributes="file_value view/value;">Download</div>
-    <iframe id="download_frame" frameborder="0">
+    <iframe id="download_frame" frameborder="0"></iframe>
     
 </html>

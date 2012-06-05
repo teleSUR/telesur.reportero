@@ -30,7 +30,7 @@ class View(dexterity.DisplayForm):
                 self.actual = int(self.request['actual'])
                 if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
                     self.actual += 1
-            elif action == 'next':
+            elif action == 'prev':
                 self.actual = int(self.request['actual'])
                 if self.actual > 0:
                     self.actual -= 1
@@ -82,11 +82,16 @@ class View(dexterity.DisplayForm):
         return reports
 
     def get_non_published_reports(self):
-        reports = self._get_catalog_results('private')
-        reports += self._get_catalog_results('revised')
-        reports += self._get_catalog_results('rejected')
-        reports += self._get_catalog_results('edited')
-        reports += self._get_catalog_results('organized')
+        pc = getToolByName(self.context, 'portal_catalog')
+        ct = "telesur.reportero.anonreport"
+        path='/'.join(self.context.getPhysicalPath())
+        sort_on='Date'
+        sort_order='reverse'
+        states = ['private','revised', 'rejected', 'edited',  'organized']
+        filters = {'review_state':{'operator': 'or', 'query': states},
+                    'portal_type': ct, 'path':path, 'sort_on':sort_on,
+                    'sort_order':sort_order}
+        reports = pc.searchResults(filters)
         return reports
 
 
@@ -97,18 +102,19 @@ class ListadoReportView(View):
     
     def update(self):
         self.actual = 0
+        self.total = 0
         publics = self.get_non_published_reports()
+        self.total = len(publics)/BACH_SIZE
         if 'action' in self.request.keys():
             action = self.request['action']
             if action == 'next':
                 self.actual = int(self.request['actual'])
                 if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
                     self.actual += 1
-            elif action == 'next':
+            elif action == 'prev':
                 self.actual = int(self.request['actual'])
                 if self.actual > 0:
                     self.actual -= 1
-        
         self.publics = publics[self.actual*BACH_SIZE:(self.actual+1)*BACH_SIZE]
     
     def render(self):

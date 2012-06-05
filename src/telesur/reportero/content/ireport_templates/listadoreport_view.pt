@@ -25,22 +25,26 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-        <h1 class="documentFirstHeading" tal:content="context/title" />
+        <div class="ireport-banner">
+            <img src="++resource++telesur.reportero/soy_reportero.jpg" />
+        </div>
 
-        <div class="published-reports-list">
-            <h2 i18n:translate="">Reports:</h2>
+        <div class="reports-list">
+            <table>
             <tal:reports repeat="brain view/publics">
-            <div class="report-item" tal:define="report brain/getObject">
-              <div class="report-item-pic">
-              </div>
+            <tr class="report-item-list" tal:define="report brain/getObject">
+              <td class="report-item-list-title">
                 <a href="#" tal:attributes="href report/absolute_url"
                             tal:content="report/Title"
                             class="view-report"/>
-            </div>
+              </td>
+              <td tal:content="report/get_status"></td>
+            </tr>
             </tal:reports>
+            </table>
             <div class="arrows">
-              <div id="report-arrow-left"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=prev&actual='+ str(view.actual)"></a></div>
-              <div id="report-arrow-right"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=next&actual='+str(view.actual)"></a></div>
+              <span id="report-arrow-left-list" tal:attributes="class python:view.actual != 0 and 'show'"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=prev&actual='+ str(view.actual)"></a></span>
+              <span id="report-arrow-right-list" tal:attributes="class python:view.actual != view.total and 'show'"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=next&actual='+str(view.actual)"></a></span>
               <div style="clear:both"></div>
             </div>
         </div>

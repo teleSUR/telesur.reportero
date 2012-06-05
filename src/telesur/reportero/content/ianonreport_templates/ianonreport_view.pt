@@ -42,7 +42,7 @@
             <img tal:attributes="src file_url"/>
             </tal:image>
           </div>
-            <div class="anonreport-date" tal:content="context/date"></div>
+            <div class="anonreport-date" tal:content="context/get_date"></div>
         </div>
         <div id="main-report-data">
           <div id="main-report-title" tal:content="context/title"></div>
