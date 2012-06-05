@@ -99,6 +99,7 @@ REPORT VIEW (PUBLIC)
 
 #main-report-media {
     width: 400px;
+    height: 225px;
     border: 1px solid red;
     float: left;
 }

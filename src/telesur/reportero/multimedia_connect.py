@@ -64,18 +64,18 @@ class MultimediaConnect(object):
     
     def publish_structure(self, slug, file_type):
         if file_type == "image":
-            url = self.multimedia_url() + '/imagen/'
+            url = self.multimedia_url() + '/imagen/' + slug
         else:
-            url = self.multimedia_url() + '/clip/'
+            url = self.multimedia_url() + '/clip/' + slug
         headers = {'Accept': 'application/json'}
         key = self.security_key()
-        body={'slug':slug, 'publicado':True}
+        body={'publicado':'true'}
         sign_key = self.firma_request(body, self.key(), key)
         body['signature'] = sign_key
         http = httplib2.Http()
         response, content = http.request(url, 'PUT', headers=headers, 
             body=urlencode(body))
-        return response
+        return response, content
     
     def get_structure(self, slug, file_type):
         if file_type == "image":
@@ -92,7 +92,9 @@ class MultimediaConnect(object):
         url = url + '?' + body_url
         response, content = http.request(url, 'GET', headers=headers, 
                 body=urlencode(body))
-        content_json = json.loads(content)
-        if response['status'] == 200 and not content_json['publicado']:
-            self.publish_structure(slug, file_type)
+        content_json = None
+        if response['status'] == '200':
+            content_json = json.loads(content)
+            if not content_json['publicado']:
+                self.publish_structure(slug, file_type)
         return response, content_json

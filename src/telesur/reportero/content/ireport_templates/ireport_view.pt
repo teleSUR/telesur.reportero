@@ -24,7 +24,9 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-        <h1 class="documentFirstHeading" tal:content="context/title" />
+    <div class="ireport-banner">
+        <img src="++resource++telesur.reportero/soy_reportero.jpg" />
+    </div>
         <div class="add-report-button">
         <a href="#" tal:attributes="href string:${context/absolute_url}/++add++telesur.reportero.anonreport"
                     tal:condition="view/can_add_reports"
@@ -33,15 +35,22 @@
         </div>
 
         <div class="published-reports-list" tal:define="video_api nocall:context/@@video_api">
-            <h2 i18n:translate="">Reports:</h2>
             <div class="main-report" tal:define="report_main view/main_report_new" tal:condition="report_main">
-              <div id="main-report-media" tal:define="new_report report_main/getObject">
+              <div id="main-report-media" 
+                  tal:define="new_report report_main/getObject;
+                              file_url new_report/get_file_url
+              ">
+                <tal:video condition="python:file_url and not report_main.is_image()">
                   <script type="text/javascript" src=""
-                      tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':new_report.get_file_url()})"                            
+                      tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"                            
                       tal:attributes="src string:${video_url};"
                       tal:content="nothing">
                       Item Title
                   </script>
+                  </tal:video>
+                  <tal:image condition="python:file_url and report_main.is_image()">
+                  <img tal:attributes="src file_url"/>
+                  </tal:image>
               </div>
               <div id="main-report-data">
                 <div id="main-report-title" tal:content="python:report_main.Title"></div>

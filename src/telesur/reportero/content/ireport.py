@@ -89,9 +89,27 @@ class View(dexterity.DisplayForm):
         reports += self._get_catalog_results('organized')
         return reports
 
+
+BACH_SIZE = 20
 class ListadoReportView(View):
     grok.require('cmf.ModifyPortalContent')
     grok.name('listado-report')
+    
+    def update(self):
+        self.actual = 0
+        publics = self.get_non_published_reports()
+        if 'action' in self.request.keys():
+            action = self.request['action']
+            if action == 'next':
+                self.actual = int(self.request['actual'])
+                if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
+                    self.actual += 1
+            elif action == 'next':
+                self.actual = int(self.request['actual'])
+                if self.actual > 0:
+                    self.actual -= 1
+        
+        self.publics = publics[self.actual*BACH_SIZE:(self.actual+1)*BACH_SIZE]
     
     def render(self):
         pt = ViewPageTemplateFile('ireport_templates/listadoreport_view.pt')

@@ -29,7 +29,7 @@
 
         <div class="published-reports-list">
             <h2 i18n:translate="">Reports:</h2>
-            <tal:reports repeat="brain view/get_all_reports">
+            <tal:reports repeat="brain view/publics">
             <div class="report-item" tal:define="report brain/getObject">
               <div class="report-item-pic">
               </div>
@@ -38,6 +38,11 @@
                             class="view-report"/>
             </div>
             </tal:reports>
+            <div class="arrows">
+              <div id="report-arrow-left"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=prev&actual='+ str(view.actual)"></a></div>
+              <div id="report-arrow-right"><a tal:attributes="href python:context.absolute_url() + '/listado-report' + '?action=next&actual='+str(view.actual)"></a></div>
+              <div style="clear:both"></div>
+            </div>
         </div>
 
     </tal:main-macro>

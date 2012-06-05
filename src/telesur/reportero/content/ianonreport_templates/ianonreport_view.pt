@@ -24,25 +24,35 @@
 
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
+    <tal:report define="file_url context/get_file_url">
     <div class="ireport-banner">
         <img src="++resource++telesur.reportero/soy_reportero.jpg" />
     </div>
-        <h1 class="documentFirstHeading" tal:content="context/title" />
         <div class="anonreport-pic" tal:define="video_api nocall:context/@@video_api">
           <div class="anonreport-media">
+            <tal:video condition="python:file_url and not context.is_image()">
             <script type="text/javascript" src=""
-                tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':context.get_file_url()})"                            
+                tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"                            
                 tal:attributes="src string:${video_url};"
                 tal:content="nothing">
                 Item Title
             </script>
+            </tal:video>
+            <tal:image condition="python:file_url and context.is_image()">
+            <img tal:attributes="src file_url"/>
+            </tal:image>
           </div>
             <div class="anonreport-date" tal:content="context/date"></div>
         </div>
-        <div class="anonreport-description" tal:content="context/description"></div>
-        <div syle="clear:both"></div>
+        <div id="main-report-data">
+          <div id="main-report-title" tal:content="context/title"></div>
+          <div id="main-report-description" tal:content="context/description"></div>
+        </div>
+        <div style="clear: both"></div>
+        
+        
         <div class="anon-file-download" tal:condition="view/can_edit">
-          <a tal:attributes="href context/get_file_url">Descargar Archivo Original</a>
+          <a tal:attributes="href file_url">Descargar Archivo Original</a>
         </div>
         
         
@@ -88,6 +98,7 @@ win = window.open(mypage,myname,settings)
             </script>
             <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+            </tal:report>
     </tal:main-macro>
 </metal:main>
 

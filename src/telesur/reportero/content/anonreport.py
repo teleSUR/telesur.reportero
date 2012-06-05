@@ -13,6 +13,7 @@ from five import grok
 
 from z3c.form.interfaces import IEditForm, IDisplayForm
 
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.dexterity.content import Item
 from plone.dexterity.events import EditFinishedEvent
 from plone.directives import dexterity, form
@@ -86,30 +87,34 @@ class AnonReport(Item):
             slug = self.edited_file_slug
         body = {}
     
+    def is_image(self):
+        return self.file_type == 'image'
+    
     def get_slug(self):
-        # if self.edited_file_slug:
-        #             return self.edited_file_slug
-        #         else:
-        #             return self.file_slug
-        import random
-        if random.randint(0, 1):
-            return 'maestros-y-jovenes-continuan-manifestaciones-en-mexico'
+        if self.edited_file_slug:
+            return self.edited_file_slug
         else:
-            return 'telesur-noticias-85776'
+            return self.file_slug
 
     def get_file_url(self):
         multimedia_connect = MultimediaConnect()
         response, content = multimedia_connect.get_structure(
-            self.get_slug(), 'video')
-        if response['status'] == '200' and 'archivo_url' in content:
+            self.get_slug(), self.file_type)
+        if response['status'] == '200' and content and 'archivo_url' in content:
             return content['archivo_url']
+        return None
     
     def get_thumb_image(self):
         multimedia_connect = MultimediaConnect()
         response, content = multimedia_connect.get_structure(
-            self.get_slug(),'video')
+            self.get_slug(), self.file_type)
         if response['status'] == '200' and 'thumbnail_pequeno' in content:
             return content['thumbnail_pequeno']
+        return None
+
+@form.default_value(field = IExcludeFromNavigation['exclude_from_nav'])
+def excludeFromNavDefaultValue(data):
+    return data.request.URL.endswith('++add++telesur.reportero.anonreport')
 
 class Edit(dexterity.EditForm):
     """ Default edit for Ideas
@@ -219,10 +224,6 @@ def redirect_after_add(obj, event):
 class View(dexterity.DisplayForm):
     grok.context(IAnonReport)
     grok.require('zope2.View')
-    
-    def update(self):
-        multimedia_connect = MultimediaConnect()
-        multimedia_connect.get_structure('maestros-y-jovenes-continuan-manifestaciones-en-mexico','video')
     
     def can_edit(self):
         permission = 'cmf.ModifyPortalContent'

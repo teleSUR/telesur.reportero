@@ -25,6 +25,7 @@
   <element
      value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+  <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
  </property>
  <property name="schema">telesur.reportero.content.anonreport.IAnonReport</property>
  <alias from="(Default)" to="(dynamic view)"/>
