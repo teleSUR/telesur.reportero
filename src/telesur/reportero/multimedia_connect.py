@@ -57,9 +57,14 @@ class MultimediaConnect(object):
         sign_key = self.firma_request(body, self.key(), key)
         body['signature'] = sign_key
         http = httplib2.Http()
-        response, content = http.request(url, 'POST', headers=headers, 
-            body=urlencode(body))
-        content_json = json.loads(content)
+        content_json = None
+        try:
+            response, content = http.request(url, 'POST', headers=headers, 
+                body=urlencode(body))
+        except:
+            response = {'status': '400'}
+        if content:
+            content_json = json.loads(content)
         return response, content_json
     
     def publish_structure(self, slug, file_type):
@@ -73,8 +78,11 @@ class MultimediaConnect(object):
         sign_key = self.firma_request(body, self.key(), key)
         body['signature'] = sign_key
         http = httplib2.Http()
-        response, content = http.request(url, 'PUT', headers=headers, 
-            body=urlencode(body))
+        try:
+            response, content = http.request(url, 'PUT', headers=headers, 
+                body=urlencode(body))
+        except:
+            response = {'status':'400'}
         return response, content
     
     def get_structure(self, slug, file_type):
@@ -90,8 +98,11 @@ class MultimediaConnect(object):
         headers = {'Accept': 'application/json'}
         body_url = urlencode(body)
         url = url + '?' + body_url
-        response, content = http.request(url, 'GET', headers=headers, 
+        try:
+            response, content = http.request(url, 'GET', headers=headers, 
                 body=urlencode(body))
+        except:
+            response = {'status': '400'}
         content_json = None
         if response['status'] == '200':
             content_json = json.loads(content)

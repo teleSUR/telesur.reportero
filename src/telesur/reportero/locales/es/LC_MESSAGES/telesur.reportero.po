@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2012-06-05 20:42+0000\n"
+"POT-Creation-Date: 2012-06-07 21:21+0000\n"
 "PO-Revision-Date: 2012-06-05 17:43-0300\n"
 "Last-Translator: Franco Pellegrini\n"
 "Language-Team: Spanish <>\n"
@@ -53,19 +53,25 @@ msgstr "Descargar archivo original"
 msgid "Edited File"
 msgstr "Archivo Editado"
 
-#: telesur/reportero/content/anonreport.py:152
+#: telesur/reportero/content/anonreport.py:168
 msgid "Error creating the                     report, please try again"
 msgstr "Error creando el reporte, por favor pruebe de nuevo"
 
-#: telesur/reportero/content/anonreport.py:197
+#: telesur/reportero/content/anonreport.py:209
 msgid "Error creating the report,                please try again"
 msgstr "\"Error creando el reporte, por favor pruebe de nuevo"
 
+#: telesur/reportero/content/anonreport.py:153
+msgid "Error creating the report, please try again"
+msgstr "Error creando el reporte, porfavor pruebe de nuevo"
+
+#: telesur/reportero/content/anonreport.py:198
+msgid "Error creating the report,please try again"
+msgstr "Error creando el reporte, porfavor pruebe de nuevo"
+
 #: telesur/reportero/widgets/upload_widget.py:73
 msgid "Error uploading file, please try again or use a diferent file"
-msgstr ""
-"\"Error cargando el archivo, por favor pruebe de nuevo o use un archivo "
-"diferente"
+msgstr "\"Error cargando el archivo, por favor pruebe de nuevo o use un archivo diferente"
 
 #: telesur/reportero/content/anonreport.py:49
 msgid "File"
@@ -140,5 +146,4 @@ msgstr "Cargar archivo editado"
 #: telesur/reportero/content/anonreport.py:50
 msgid "upload video or image"
 msgstr "Cargar imagen o video"
-
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-05 20:42+0000\n"
+"POT-Creation-Date: 2012-06-07 21:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,12 +53,20 @@ msgstr ""
 msgid "Edited File"
 msgstr ""
 
-#: telesur/reportero/content/anonreport.py:152
+#: telesur/reportero/content/anonreport.py:168
 msgid "Error creating the                     report, please try again"
 msgstr ""
 
-#: telesur/reportero/content/anonreport.py:197
+#: telesur/reportero/content/anonreport.py:209
 msgid "Error creating the report,                please try again"
+msgstr ""
+
+#: telesur/reportero/content/anonreport.py:153
+msgid "Error creating the report, please try again"
+msgstr ""
+
+#: telesur/reportero/content/anonreport.py:198
+msgid "Error creating the report,please try again"
 msgstr ""
 
 #: telesur/reportero/widgets/upload_widget.py:73

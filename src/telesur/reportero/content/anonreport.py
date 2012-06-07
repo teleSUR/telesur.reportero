@@ -149,8 +149,8 @@ class Edit(dexterity.EditForm):
             if 'file_type' in data.keys():
                 file_type = data['file_type']
             else:
-                raise ActionExecutionError(Invalid(_(u"Error creating the \
-                    report, please try again")))
+                raise ActionExecutionError(Invalid(
+                    _(u"Error creating the report, please try again")))
             if 'IBasic.title' in data.keys():
                 body['titulo'] = data['IBasic.title']
             if 'IBasic.description' in data.keys():
@@ -194,8 +194,8 @@ class Add(dexterity.AddForm):
         if 'file_type' in data.keys():
             file_type = data['file_type']
         else:
-            raise ActionExecutionError(Invalid(_(u"Error creating the report,\
-                please try again")))
+            raise ActionExecutionError(Invalid(
+                _(u"Error creating the report,please try again")))
         if 'IBasic.title' in data.keys():
             body['titulo'] = data['IBasic.title'].encode("utf-8", "ignore")
         if 'file_id' in data.keys():
