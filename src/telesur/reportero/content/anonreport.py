@@ -104,8 +104,11 @@ class AnonReport(Item):
         multimedia_connect = MultimediaConnect()
         response, content = multimedia_connect.get_structure(
             self.get_slug(), self.file_type)
-        if response['status'] == '200' and content and 'archivo_url' in content:
-            return content['archivo_url']
+        if response['status'] == '200' and content:
+            if not self.is_image() and 'archivo_url' in content:
+                return content['archivo_url']     
+            else:
+                return content['thumbnail_grande']
         return None
     
     def get_thumb_image(self):
