@@ -64,8 +64,8 @@
               <div style="clear: both"></div>
             </div>
             </tal:reportmain>
-            <div id="main-report-comments" tal:define="report_main view/main_report_new;">
-              <tal:comments tal:condition="report_main" tal:define="report_main_new report_main/getObject">
+            <div id="main-report-comments" tal:define="report_main view/main_report_new;" tal:condition="report_main">
+              <tal:comments tal:define="report_main_new report_main/getObject">
             <a tal:attributes="href report_main_new/absolute_url" i18n:translate="">Comments</a>
             </tal:comments>
             </div>

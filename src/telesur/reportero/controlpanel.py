@@ -13,22 +13,22 @@ class IReporteroSettings(Interface):
 
     upload_url = schema.TextLine(
             title=_(u'Upload url'),
-            default=u"http://upload.tlsur.net/files/",
+            default=u"http://upload.telesurtv.net/files/",
             required=True)
     
     multimedia_url = schema.TextLine(
-            title=_(u'Upload url'),
+            title=_(u'Multimedia url'),
             default=u"http://multimedia.tlsur.net/api",
             required=True)
     
     security_key = schema.TextLine(
-            title=_(u'Upload key'),
-            default=u'k4}"-^30C$:3l04$(/<5"7*6|Ie"6x',
+            title=_(u'Security key'),
+            default=u'Tl&MF4s#e-9x6F[m7]42FyO7mt8Ku',
             required=True)
     
     key = schema.TextLine(
             title=_(u'Upload key'),
-            default=u'telesursoyreporteroplonepruebas',
+            default=u'telesursoyreporteroploneweb',
             required=True)
 
 class ReporteroSettingsEditForm(controlpanel.RegistryEditForm):
