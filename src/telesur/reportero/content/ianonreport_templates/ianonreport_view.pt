@@ -58,7 +58,7 @@
 
 
 <!-- discuss         -->
-
+<tal:discuss tal:condition="context/is_published_ct">
         <script type="text/javascript">
                var win = null;
 function NewWindow(mypage,myname,w,h,scroll){
@@ -107,6 +107,7 @@ win = window.open(mypage,myname,settings)
                class="dsq-brlink"
                i18n:translate="">blog comments powered by <span class="logo-disqus"
                                                                 i18n:name="disqus">Disqus</span></a>
+                </tal:discuss>
             </tal:report>
     </tal:main-macro>
 </metal:main>

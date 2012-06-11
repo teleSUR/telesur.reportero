@@ -129,6 +129,9 @@ class AnonReport(Item):
     def get_date(self):
         date_utility = getUtility(IPrettyDate)
         return date_utility.date(self.date)
+    
+    def is_published_ct(self):
+        return self.get_status() == "published"
 
 # @form.default_value(field = IExcludeFromNavigation['exclude_from_nav'])
 # def excludeFromNavDefaultValue(data):

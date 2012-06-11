@@ -13,7 +13,6 @@
 
 .anonreport-media {
     width: 400px;
-    height: 225px;
     border: 1px solid red;
 }
 
@@ -112,9 +111,12 @@ REPORT VIEW (PUBLIC)
 
 #main-report-media {
     width: 400px;
-    height: 225px;
     border: 1px solid red;
     float: left;
+}
+
+#main-report-media img {
+    width: 100%;
 }
 
 #content a#main-report-title:link {
