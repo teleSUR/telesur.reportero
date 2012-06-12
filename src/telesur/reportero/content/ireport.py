@@ -15,27 +15,28 @@ class IIReport(form.Schema):
     A section that contains reports
     """
 
-BACH_SIZE = 6
-
+BATCH_SIZE = 6
 class View(dexterity.DisplayForm):
     grok.context(IIReport)
     grok.require('zope2.View')
     
     def update(self):
         self.actual = 0
+        self.total = 0
         publics = self.get_published_reports()
+        self.total = len(publics)/BATCH_SIZE
         if 'action' in self.request.keys():
             action = self.request['action']
             if action == 'next':
                 self.actual = int(self.request['actual'])
-                if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
+                if len(publics[(self.actual+1)*BATCH_SIZE: (self.actual+2)*BATCH_SIZE]) > 0:
                     self.actual += 1
             elif action == 'prev':
                 self.actual = int(self.request['actual'])
                 if self.actual > 0:
                     self.actual -= 1
         
-        self.publics = publics[self.actual*BACH_SIZE:(self.actual+1)*BACH_SIZE]
+        self.publics = publics[self.actual*BATCH_SIZE:(self.actual+1)*BATCH_SIZE]
         self.main_report_new = None
         if self.publics:
             self.main_report_new = self.publics[0]

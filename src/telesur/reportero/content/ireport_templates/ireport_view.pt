@@ -70,7 +70,7 @@
             </tal:comments>
             </div>
             <div id="report-items-carousel">
-              <div id="report-arrow-left"><a tal:attributes="href python:context.absolute_url() + '?action=prev&amp;actual='+ str(view.actual)"></a></div>
+              <div id="report-arrow-left" tal:attributes="class python:view.actual != 0 and 'show'"><a tal:attributes="href python:context.absolute_url() + '?action=prev&amp;actual='+ str(view.actual)"></a></div>
               <div id="report-reports">
               <tal:reports repeat="brain view/publics">
               <div class="report-item" tal:define="report brain/getObject">
@@ -85,7 +85,7 @@
               </tal:reports>
               <div style="clear:both"></div>
               </div>
-              <div id="report-arrow-right"><a tal:attributes="href python:context.absolute_url() + '?action=next&amp;actual='+str(view.actual)"></a></div>
+              <div id="report-arrow-right" tal:attributes="class python:view.actual != view.total and 'show'"><a tal:attributes="href python:context.absolute_url() + '?action=next&amp;actual='+str(view.actual)"></a></div>
               <div style="clear:both"></div>
             </div>
         </div>

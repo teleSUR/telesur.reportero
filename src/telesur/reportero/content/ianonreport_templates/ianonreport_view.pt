@@ -45,7 +45,7 @@
             <div class="anonreport-date" tal:content="context/get_date"></div>
         </div>
         <div id="main-report-data">
-          <div id="main-report-title" tal:content="context/title"></div>
+            <a id="main-report-title" tal:content="context/title" tal:attributes="href context/absolute_url"></a>
           <div id="main-report-description" tal:content="context/description"></div>
         </div>
         <div style="clear: both"></div>
