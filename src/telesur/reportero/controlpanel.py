@@ -13,7 +13,7 @@ class IReporteroSettings(Interface):
 
     upload_url = schema.TextLine(
             title=_(u'Upload url'),
-            default=u"http://upload.telesurtv.net/files/",
+            default=u"/upload/",
             required=True)
     
     multimedia_url = schema.TextLine(
