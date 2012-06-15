@@ -83,6 +83,7 @@ class MultimediaConnect(object):
                 body=urlencode(body))
         except:
             response = {'status':'400'}
+            content = None
         return response, content
     
     def get_structure(self, slug, file_type):
