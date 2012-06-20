@@ -24,7 +24,7 @@
 
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-
+      <div class="soy-reporter-list-view">
         <div class="ireport-banner">
             <img src="++resource++telesur.reportero/soy_reportero.jpg" />
         </div>
@@ -54,7 +54,7 @@
               <div style="clear:both"></div>
             </div>
         </div>
-
+        </div>
     </tal:main-macro>
 </metal:main>
 

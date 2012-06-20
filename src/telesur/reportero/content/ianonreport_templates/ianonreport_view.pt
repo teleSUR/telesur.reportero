@@ -25,11 +25,14 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
     <tal:report define="file_url context/get_file_url">
+    <div id="content-reports">
     <div class="ireport-banner">
         <img src="++resource++telesur.reportero/soy_reportero.jpg" />
     </div>
+    <div class="main-report">
         <div class="anonreport-pic" tal:define="video_api nocall:context/@@video_api">
-          <div class="anonreport-media">
+          <div id="main-report-media">
+            <div class="padding">
             <tal:video condition="python:file_url and not context.is_image()">
             <script type="text/javascript" src=""
                 tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"
@@ -41,6 +44,7 @@
             <tal:image condition="python:file_url and context.is_image()">
             <img tal:attributes="src file_url"/>
             </tal:image>
+            </div>
           </div>
             <div class="anonreport-date" tal:content="context/get_date"></div>
         </div>
@@ -108,6 +112,8 @@ win = window.open(mypage,myname,settings)
                i18n:translate="">blog comments powered by <span class="logo-disqus"
                                                                 i18n:name="disqus">Disqus</span></a>
                 </tal:discuss>
+                </div>
+                </div>
             </tal:report>
     </tal:main-macro>
 </metal:main>

@@ -1,5 +1,10 @@
 .ireport-banner {
-    margin-left: 50px;
+    
+    width: 852px;
+}
+
+.ireport-banner img {
+    margin-left: 49px;
 }
 
 .anonreport-pic {
@@ -45,21 +50,27 @@ REPORT VIEW (PUBLIC)
 */
 
 .report-item {
-    width: 140px;
     float: left;
+    text-align: center;
+    width: 155px;
 }
 
 .report-item-thumb {
 }
 
 #report-items-carousel {
-    width: 100%;
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
     position:relative;
+    min-height: 65px;
+    border: 1px solid #5C2F39;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 5px 4px 7px -2px;
+    margin-bottom: 10px;
+    padding: 10px 0 10px 10px;
+}
+
+#report-items-carousel .padding {
     padding-top: 10px;
     padding-bottom: 10px;
-    min-height: 65px;
 }
 
 #report-reports,
@@ -69,7 +80,7 @@ REPORT VIEW (PUBLIC)
 }
 
 #report-reports {
-    width: 847px;
+    width: 810px;
     position: relative;
     left: 10px;
 }
@@ -107,16 +118,26 @@ REPORT VIEW (PUBLIC)
 
 .main-report {
     margin-bottom: 10px;
+    padding: 50px 10px 46px 73px;
+    border: 1px solid #5c2f39;
+    border-radius: 10px;
+    box-shadow: 5px 4px 7px -2px;
+    background: url("++resource++telesur.reportero/fondo_foto_part.jpg") no-repeat scroll -2px -4px transparent
 }
 
 #main-report-media {
-    width: 400px;
-    border: 1px solid red;
+    border: 1px solid #370715;
     float: left;
 }
 
+#main-report-media .padding {
+    padding: 10px;
+}
+
+
 #main-report-media img {
     width: 100%;
+    box-shadow: 5px 5px 5px -1px;
 }
 
 #content a#main-report-title:link {
@@ -141,10 +162,11 @@ REPORT VIEW (PUBLIC)
 
 #content #main-report-comments {
     margin-bottom: 25px;
+    float: right;
 }
 
 #main-report-data {
-    margin-left: 415px;
+    margin-left: 430px;
 }
 
 .anon-file-download {
@@ -152,7 +174,7 @@ REPORT VIEW (PUBLIC)
 }
 
 #content .add-report-button a {
-    color: #990000;
+    color: #000000;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: bold;
@@ -165,7 +187,7 @@ REPORT VIEW (PUBLIC)
 }
 
 #content .add-report-button a:link {
-    border: 1px solid #990000;
+    border: 1px solid #000000;
     border-radius: 10px 10px 10px 10px;
 }
 
@@ -184,4 +206,73 @@ td.report-item-list-title {
 
 .arrows-list {
     height: 53px;
+}
+
+#content-reports {
+    border: 1px solid #5C2F39;
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+    padding: 10px;
+    width: 892px;
+}
+
+.new-report {
+    border: 1px solid #CCC;
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
+    margin: auto;
+    width: 892px;
+    margin-top: 10px;
+}
+
+.soy-reporter-list-view {
+    border: 1px solid #CCC;
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
+    margin: auto;
+    width: 892px;
+}
+
+.new-report-right,
+.new-report-left {
+    width: 50%;
+    float:left;
+}
+
+.new-report-right img {
+    float: left;
+    margin-right: 10px;
+}
+
+.new-report-right p {
+    padding-left: 10px;
+    padding-top: 40px;
+    text-align: left;  
+}
+
+.requisitos {
+    color: #990000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#ireport-user-data {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.user-data {
+    font-weight: bold;
+    text-align: center;
+}
+
+#content .user-data a:link {
+    border-bottom: 0;
+    color: #000000;
+}
+
+#content .nuevo a:link {
+    border-bottom: 0;
 }

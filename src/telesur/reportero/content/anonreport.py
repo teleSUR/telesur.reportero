@@ -36,7 +36,19 @@ class IAnonReport(form.Schema):
     """
     A report that any site visitor can add.
     """
-        
+
+    form.omitted(IEditForm, 'name')
+    name = schema.TextLine(title=_(u'Name'),
+            description=_(u'help_name',default=u'Enter your name.'),
+            default=u'via',
+            required=True)
+    
+    form.omitted(IEditForm, 'country')
+    country = schema.TextLine(title=_(u'Country'),
+            description=_(u'help_country',default=u'Enter your country.'),
+            default=u'web',
+            required=True)
+    
     status = schema.Bool(
             title=_(u'Status'),
             description=_(u'help_status',

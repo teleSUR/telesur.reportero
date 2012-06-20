@@ -23,27 +23,23 @@
 
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-
+    <div id="content-reports">
+      <div class="add-report-button">
+      <a href="#" tal:attributes="href string:${context/absolute_url}/listado-report"
+                              tal:condition="view/can_edit"
+                              class="report-link edit-report"
+                              i18n:translate="">Non Published Reports</a>
+      </div>
     <div class="ireport-banner">
         <img src="++resource++telesur.reportero/soy_reportero.jpg" />
     </div>
-        <div class="add-report-button">
-        <a href="#" tal:attributes="href string:${context/absolute_url}/++add++telesur.reportero.anonreport"
-                    tal:condition="view/can_add_reports"
-                    class="report-link edit-report"
-                    i18n:translate="">Add new report</a>
-        <a href="#" tal:attributes="href string:${context/absolute_url}/listado-report"
-                                tal:condition="view/can_edit"
-                                class="report-link edit-report"
-                                i18n:translate="">Non Published Reports</a>
-        </div>
-
         <div class="published-reports-list" tal:define="video_api nocall:context/@@video_api;report_main view/main_report_new" >
           <tal:reportmain tal:condition="report_main">
             <div class="main-report"
             tal:define="new_report report_main/getObject;
                         file_url new_report/get_file_url">
               <div id="main-report-media">
+                <div class="padding">
                 <tal:video condition="python:file_url and not new_report.is_image()">
                   <script type="text/javascript" src=""
                       tal:define="video_url python:video_api.get_video_widget_url('', 400, {'archivo_url':file_url})"
@@ -55,30 +51,43 @@
                   <tal:image condition="python:file_url and new_report.is_image()">
                   <img tal:attributes="src file_url"/>
                   </tal:image>
-
+                  </div>
               </div>
               <div id="main-report-data">
                 <a id="main-report-title" tal:content="python:report_main.Title" tal:attributes="href new_report/absolute_url"></a>
                 <div id="main-report-description" tal:content="python:report_main.Description"></div>
               </div>
               <div style="clear: both"></div>
+              <tal:below define="report_main view/main_report_new;
+                              report_main_new report_main/getObject">
+              <div tal:condition="report_main" id="ireport-user-data">
+                <span tal:content="python:report_main_new.name"></span>-<span tal:content="python:report_main_new.country"></span>
+              </div>
+              <div id="main-report-comments"  tal:condition="report_main">
+                <tal:comments>
+              <a tal:attributes="href report_main_new/absolute_url" i18n:translate=""><img src="++resource++telesur.reportero/btn_comentarios.jpg" /></a>
+              </tal:comments>
+              </div>
+              </tal:below>
             </div>
             </tal:reportmain>
-            <div id="main-report-comments" tal:define="report_main view/main_report_new;" tal:condition="report_main">
-              <tal:comments tal:define="report_main_new report_main/getObject">
-            <a tal:attributes="href report_main_new/absolute_url" i18n:translate="">Comments</a>
-            </tal:comments>
-            </div>
             <div id="report-items-carousel">
+              <div class="padding">
               <div id="report-arrow-left" tal:attributes="class python:view.actual != 0 and 'show'"><a tal:attributes="href python:context.absolute_url() + '?action=prev&amp;actual='+ str(view.actual)"></a></div>
               <div id="report-reports">
               <tal:reports repeat="brain view/publics">
               <div class="report-item" tal:define="report brain/getObject">
                   <div class="report-item-thumb"><img tal:attributes="src report/get_thumb_image"/></div>
-                  <div>
+                  <div class="user-data">
                   <a href="#" tal:define="report brain/getObject"
                               tal:attributes="href report/absolute_url"
-                              tal:content="report/Title"
+                              tal:content="report/name"
+                              class="view-report"/>
+                  </div>
+                  <div class="user-data">
+                  <a href="#" tal:define="report brain/getObject"
+                              tal:attributes="href report/absolute_url"
+                              tal:content="report/country"
                               class="view-report"/>
                   </div>
               </div>
@@ -87,7 +96,34 @@
               </div>
               <div id="report-arrow-right" tal:attributes="class python:view.actual != view.total and 'show'"><a tal:attributes="href python:context.absolute_url() + '?action=next&amp;actual='+str(view.actual)"></a></div>
               <div style="clear:both"></div>
+              </div>
             </div>
+        </div>
+        </div>
+        <div class="new-report">
+          <div class="new-report-left requisitos">
+            <div>
+          <img src="++resource++telesur.reportero/logo_soy.jpg"/>
+          </div>
+          
+          <div class="add-report-button">
+          <a href="#" tal:attributes="href string:${context/absolute_url}/++add++telesur.reportero.anonreport"
+                      tal:condition="view/can_add_reports"
+                      class="report-link edit-report"
+                      i18n:translate="">Add new report</a>
+          </div>
+          Te invitamos a ser parte de nuestra sección Soy Reportero suscribiéndote en nuestro sitio en internet, o enviado tus fotos y videos a nuestra cuenta en twitter @teleSURtv usando el hashtag #SoyReportero. Empieza a contarnos la historia de nuestros pueblos, informaciones que pueden hacer noticia, solo por teleSUR. 
+          </div>
+          <div class="new-report-right requisitos">
+          <img src="++resource++telesur.reportero/imagen_contrasena3.jpg"/>
+          <p>Te invitamos a que nos envíes tus fotos y videos y te conviertas en la voz del Sur. Empieza a contarnos la historia de nuestros pueblos</p>
+          </div>
+          <div style="clear:both;"></div>
+          <div class="nuevo" align="center" style="margin-top:15px; margin-bottom:15px;">
+          <a target="_blank"  href="http://reportero.telesurtv.net/condiciones_uso.php">
+          <img width="142" height="31" border="0" src="++resource++telesur.reportero/btn_condiciones_uso.jpg">
+          </a>
+          </div>
         </div>
     </tal:main-macro>
 </metal:main>

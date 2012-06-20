@@ -15,7 +15,7 @@ class IIReport(form.Schema):
     A section that contains reports
     """
 
-BATCH_SIZE = 6
+BATCH_SIZE = 5
 class View(dexterity.DisplayForm):
     grok.context(IIReport)
     grok.require('zope2.View')
