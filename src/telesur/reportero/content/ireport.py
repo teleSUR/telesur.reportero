@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import math
+
 from five import grok
 
 from plone.directives import dexterity, form
@@ -15,7 +17,7 @@ class IIReport(form.Schema):
     A section that contains reports
     """
 
-BATCH_SIZE = 5
+BATCH_SIZE = 5.0
 class View(dexterity.DisplayForm):
     grok.context(IIReport)
     grok.require('zope2.View')
@@ -24,19 +26,19 @@ class View(dexterity.DisplayForm):
         self.actual = 0
         self.total = 0
         publics = self.get_published_reports()
-        self.total = len(publics)/BATCH_SIZE
+        self.total = int(math.ceil(len(publics)/BATCH_SIZE)) - 1
         if 'action' in self.request.keys():
             action = self.request['action']
             if action == 'next':
                 self.actual = int(self.request['actual'])
-                if len(publics[(self.actual+1)*BATCH_SIZE: (self.actual+2)*BATCH_SIZE]) > 0:
+                if len(publics[(self.actual+1)*int(BATCH_SIZE): (self.actual+2)*int(BATCH_SIZE)]) > 0:
                     self.actual += 1
             elif action == 'prev':
                 self.actual = int(self.request['actual'])
                 if self.actual > 0:
                     self.actual -= 1
         
-        self.publics = publics[self.actual*BATCH_SIZE:(self.actual+1)*BATCH_SIZE]
+        self.publics = publics[self.actual*int(BATCH_SIZE):(self.actual+1)*int(BATCH_SIZE)]
         self.main_report_new = None
         if self.publics:
             self.main_report_new = self.publics[0]
@@ -96,7 +98,7 @@ class View(dexterity.DisplayForm):
         return reports
 
 
-BACH_SIZE = 20
+BACH_SIZE = 20.0
 class ListadoReportView(View):
     grok.require('cmf.ModifyPortalContent')
     grok.name('listado-report')
@@ -105,18 +107,18 @@ class ListadoReportView(View):
         self.actual = 0
         self.total = 0
         publics = self.get_non_published_reports()
-        self.total = len(publics)/BACH_SIZE
+        self.total = int(math.ceil(len(publics)/BACH_SIZE))-1
         if 'action' in self.request.keys():
             action = self.request['action']
             if action == 'next':
                 self.actual = int(self.request['actual'])
-                if len(publics[(self.actual+1)*BACH_SIZE: (self.actual+2)*BACH_SIZE]) > 0:
+                if len(publics[(self.actual+1)*int(BACH_SIZE): (self.actual+2)*int(BACH_SIZE)]) > 0:
                     self.actual += 1
             elif action == 'prev':
                 self.actual = int(self.request['actual'])
                 if self.actual > 0:
                     self.actual -= 1
-        self.publics = publics[self.actual*BACH_SIZE:(self.actual+1)*BACH_SIZE]
+        self.publics = publics[self.actual*int(BACH_SIZE):(self.actual+1)*int(BACH_SIZE)]
     
     def render(self):
         pt = ViewPageTemplateFile('ireport_templates/listadoreport_view.pt')
