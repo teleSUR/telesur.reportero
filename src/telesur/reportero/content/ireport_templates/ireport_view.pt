@@ -65,7 +65,7 @@
               </div>
               <div id="main-report-comments"  tal:condition="report_main">
                 <tal:comments>
-              <a tal:attributes="href report_main_new/absolute_url" i18n:translate=""><img src="++resource++telesur.reportero/btn_comentarios.jpg" /></a>
+              <a tal:attributes="href report_main_new/absolute_url"><img src="++resource++telesur.reportero/btn_comentarios.jpg" /></a>
               </tal:comments>
               </div>
               </tal:below>
