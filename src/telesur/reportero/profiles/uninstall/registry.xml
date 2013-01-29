@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<registry>
+    <record name="telesur.reportero.controlpanel.IReporteroSettings.upload_url" remove="True" delete="True"/>
+    <record name="telesur.reportero.controlpanel.IReporteroSettings.multimedia_url" remove="True" delete="True"/>
+    <record name="telesur.reportero.controlpanel.IReporteroSettings.security_key" remove="True" delete="True"/>
+    <record name="telesur.reportero.controlpanel.IReporteroSettings.key" remove="True" delete="True"/>
+</registry>
